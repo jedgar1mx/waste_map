@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title>Waste Calendar</title>
+  <meta name="description" content="Waste map is an application that will privide the citizens of the City of Detroit with information about their various waste pick up dates.">
+  <meta name="author" content="Edgar Montes & Dexter Slursarski">
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.29.0/mapbox-gl.css' rel='stylesheet' />
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.css' type='text/css' />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.29.0/mapbox-gl.js"></script>
+  <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
+</head>
+<body>
+ <style>
+      body { margin:0; padding:0; }
+      #map {width: 100%; height: 100vh;}
+      #info{width: 30em; height: 100vh; background-color: #fff;}
+  </style>
+  <main>
+    <section id="info">
+
+    </section>
+    <section id='map'></section>
+  </main>
+  <script src='assets/js/map.js'></script>
+</body>
+</html>
