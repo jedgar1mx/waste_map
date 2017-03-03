@@ -2,8 +2,8 @@
 body { margin:0; padding:0; font-family: 'Open Sans', sans-serif;}
 main {position: relative; width: 100%; height: 100vh; overflow: hidden;}
 #map {width: 100%; height: 100vh;}
-#info {width: 25em; height: 100vh; background-color: #fff;position: absolute; top: 0: ;left: -27em; z-index: 5; padding: 2em 0;}
-#info.active {width: 25em; height: 100vh; background-color: #fff;position: absolute; top: 0: ;left: 0; z-index: 5; padding: 2em 0;}
+#info {width: 25em; height: 100vh; background-color: #fff;position: absolute; top: 0: ;left: -29em; z-index: 5; padding: 2em 0;transition: all 0.2s ease-in-out;}
+#info.active {width: 25em; height: 100vh; background-color: #fff;position: absolute; top: 0: ;left: 0; z-index: 5; padding: 2em 0;transition: all 0.2s ease-in-out;max-width: 95%;}
 .info-container > article{padding: 0 1em; margin-bottom: 1em;}
 .info-container > .street-name{font-family: 'Roboto', sans-serif; font-size: 1.5em; font-weight: bold; color: #EB002B; border-bottom: 1px solid #cdcac7; text-align: center;padding-bottom: 1em;}
 .info-container > .garbage, .info-container > .recycle, .info-container > .bulk, .info-container > .provider{border: 1px solid #cdcac7; margin: 1em; position: relative; padding: 1em;}
@@ -13,8 +13,8 @@ main {position: relative; width: 100%; height: 100vh; overflow: hidden;}
 .info-container > .note{border: 1px solid #cdcac7; font-size: 80%; margin: 1em 1.25em; position: relative; padding: 1em;}
 .info-container > .note > span, .info-container > .bulk > span, .info-container > .recycle > span, .info-container > .garbage > span, .info-container > .provider > span{position: absolute; top: -.75em; left: 1em; background-color: #fff; padding: 0 .5em; font-weight: bold}
 .info-container > .subscribe{text-align: center;}
-.info-container > .subscribe > button{padding: .5em; background-color: #EB002B; color: #fff; border: none; font-size: 1em; cursor: pointer; transition: all 0.2s ease-in-out;}
-.info-container > .subscribe > button:hover{padding: .7em; transition: all 0.2s ease-in-out;}
+.info-container > .subscribe > form > button{padding: .5em; background-color: #EB002B; color: #fff; border: none; font-size: 1em; cursor: pointer; transition: all 0.2s ease-in-out; margin-top: 1em;}
+.info-container > .subscribe > form > button:hover{padding: .7em; transition: all 0.2s ease-in-out;}
 #close-emergency-modal-btn{
   cursor: pointer;
   position: absolute;
@@ -39,4 +39,50 @@ main {position: relative; width: 100%; height: 100vh; overflow: hidden;}
 }
 #close-emergency-modal-btn > img{
   width: 100%;
+}
+.calendar > article{
+  padding: .5em; background-color: #075be9; color: #fff; border: none; font-size: 1em; cursor: pointer; transition: all 0.2s ease-in-out; margin-top: 1em;text-align: center;
+}
+.calendar > article > span{
+  position: relative;
+  top: -.25em;
+}
+.calendar > article:hover{
+  padding: .7em; transition: all 0.2s ease-in-out;
+}
+#box-calendar {width: 100%; height: 100vh; background-color: #fff;position: absolute; top: 0: ;left: -110%; z-index: 3; padding: 2em 0;transition: all 0.2s ease-in-out;}
+#box-calendar.active {width: 100%; height: 100vh; background-color: #fff;position: absolute; top: 0: ;left: 0; z-index: 3; padding: 2em 0;transition: all 0.2s ease-in-out;}
+#back-to-infor-btn{position: absolute; right: -1em; top: calc((100% - 5em)/2); cursor: pointer; z-index: 4}
+#back-to-infor-btn > .back-text{background-color: #EB002B; color: #fff; transform: rotate(90deg); padding: .5em 1em;}
+#back-to-infor-btn > .triangle{
+  position: absolute;
+  top: calc((100% - 4.5em)/2);
+  right: 3.4em;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 2.25em 1em 2.25em 0;
+  border-color: transparent #EB002B transparent transparent;
+}
+#back-to-infor-btn:hover > .back-text{
+  animation: bounce .5s;
+  transform-origin: center
+}
+@keyframes bounce {
+  22.2% {
+    transform: rotate(90deg);
+    padding: .75em 1em;
+  }
+  55.5% {
+    transform: rotate(90deg);
+    padding: 1em 1em;
+  }
+  88.8% {
+    transform: rotate(90deg);
+    padding: .75em 1em;
+  }
+  100% {
+    transform: rotate(90deg);
+    padding: .5em 1em;
+  }
 }

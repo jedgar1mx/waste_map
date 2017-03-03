@@ -1,0 +1,40 @@
+@media print{
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+  body {
+    font-family: 'Open Sans', sans-serif;
+  }
+  #leyend{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  #leyend > article{
+    font-weight: bold;
+    padding: 2em 1em;
+  }
+  #leyend > article:first-child > span:first-child{
+    width: 1em;
+    height: 1em;
+    background-color: #FA4F2E;
+    color: #FA4F2E;
+  }
+  #leyend > article:nth-child(2) > span:first-child{
+    width: 1em;
+    height: 1em;
+    background-color: #068A24;
+    color: #068A24;
+  }
+  #leyend > article:nth-child(3) > span:first-child{
+    width: 1em;
+    height: 1em;
+    background-color: #114BC7;
+    color: #114BC7;
+  }
+  #leyend > article:nth-child(4) > span:first-child{
+    width: 1em;
+    height: 1em;
+    background-color: #DF5800;
+    color: #DF5800;
+  }
+}

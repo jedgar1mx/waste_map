@@ -3,7 +3,7 @@ var map = new mapboxgl.Map({
   container: 'map', // container id
   style: 'mapbox://styles/slusarskiddetroitmi/ciymfavyb00072sqe0bu9rwht', //stylesheet location
   center: [-83.1, 42.36], // starting position
-  zoom: 11 // starting zoom
+  zoom: 11, // starting zoom
 });
 
 
@@ -93,7 +93,6 @@ map.on('load', function(window) {
     });
   geocoder.on('result', function(ev) {
       console.log(ev.result.geometry);
-      // let wasteData = $.getJSON('http://gis.detroitmi.gov/arcgis/rest/services/Services/WastePickup/MapServer/0/query?where=&text=&objectIds=&time=&geometry='+ev.result.geometry.coordinates[0]+'+'+ev.result.geometry.coordinates[1]+'&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&f=json');
       let tempAddr = document.querySelector('.mapboxgl-ctrl-geocoder.mapboxgl-ctrl > input').value.split(',')[0];
       tempAddr = tempAddr.split(' ');
       let newTempAddr = '';
@@ -103,21 +102,48 @@ map.on('load', function(window) {
         ((index < size) && (index + 1) !== size) ? newTempAddr += '+': 0;
       });
       console.log(newTempAddr);
-      $.getJSON('http://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/findAddressCandidates?Street='+ newTempAddr +'&ZIP=&Single+Line+Input=&category=&outFields=&maxLocations=&outSR=&searchExtent=&location=&distance=&magicKey=&f=json', function( data ) {
-        let addressCoordinates = data.candidates[0].location;
-        console.log(addressCoordinates.x);
-        console.log(addressCoordinates.y);
-        $.getJSON('http://gis.detroitmi.gov/arcgis/rest/services/Services/WastePickup/FeatureServer/0/query?where=&objectIds=&time=&geometry='+addressCoordinates.x+'%2C+'+addressCoordinates.y+'&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelWithin&distance=&units=esriSRUnit_Foot&relationParam=&outFields=*&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&gdbVersion=&returnDistinctValues=false&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&multipatchOption=&resultOffset=&resultRecordCount=&f=json' , function( data ) {
-          console.log(data);
-          console.log(ev.result.geometry);
-          map.getSource('single-point').setData(ev.result.geometry);
+      // $.getJSON('http://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/findAddressCandidates?Street='+ newTempAddr +'&ZIP=&Single+Line+Input=&category=&outFields=&maxLocations=&outSR=&searchExtent=&location=&distance=&magicKey=&f=json', function( data ) {
+      //   let addressCoordinates = data.candidates[0].location;
+      //   console.log(addressCoordinates.x);
+      //   console.log(addressCoordinates.y);
+      //   $.getJSON('http://gis.detroitmi.gov/arcgis/rest/services/Services/WastePickup/FeatureServer/0/query?where=&objectIds=&time=&geometry='+addressCoordinates.x+'%2C+'+addressCoordinates.y+'&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelWithin&distance=&units=esriSRUnit_Foot&relationParam=&outFields=*&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&gdbVersion=&returnDistinctValues=false&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&multipatchOption=&resultOffset=&resultRecordCount=&f=json' , function( data ) {
+      //     console.log(data);
+      //     console.log(ev.result.geometry);
+      //     map.getSource('single-point').setData(ev.result.geometry);
+      //     document.querySelector('.info-container > .street-name').innerHTML = document.querySelector('.mapboxgl-ctrl-geocoder.mapboxgl-ctrl > input').value.split(',')[0];
+      //     document.querySelector('.info-container > .provider').innerHTML = '<span>Provider:</span> ' + capitalizeFirstLetter(data.features[0].attributes.contractor);
+      //     document.querySelector('.info-container > .garbage').innerHTML = '<span>Garbage:</span> ' + capitalizeFirstLetter(data.features[0].attributes.garbage);
+      //     document.querySelector('.info-container > .recycle').innerHTML = '<span>Recycle:</span> ' + capitalizeFirstLetter(data.features[0].attributes.recycling) + '-' + capitalizeFirstLetter(data.features[0].attributes.section);
+      //     document.querySelector('.info-container > .bulk').innerHTML = '<span>Bulk:</span> ' + capitalizeFirstLetter(data.features[0].attributes.bulk) + '-' + capitalizeFirstLetter(data.features[0].attributes.section);
+      //     (document.querySelector('#info').className === 'active') ? 0 : document.querySelector('#info').className = 'active';
+      //   });
+      // });
+      $.getJSON('http://gis.detroitmi.gov/arcgis/rest/services/Services/services/MapServer/0/query?where=&text=&objectIds=&time=&geometry='+ev.result.geometry.coordinates[0]+'%2C+'+ev.result.geometry.coordinates[1]+'&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelWithin&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&resultRecordCount=&f=pjson' , function( data ) {
+        console.log(data);
+        console.log(ev.result.geometry);
+        map.getSource('single-point').setData(ev.result.geometry);
+        if(data.features.length > 1){
+          console.log('new layout');
           document.querySelector('.info-container > .street-name').innerHTML = document.querySelector('.mapboxgl-ctrl-geocoder.mapboxgl-ctrl > input').value.split(',')[0];
           document.querySelector('.info-container > .provider').innerHTML = '<span>Provider:</span> ' + capitalizeFirstLetter(data.features[0].attributes.contractor);
-          document.querySelector('.info-container > .garbage').innerHTML = '<span>Garbage:</span> ' + capitalizeFirstLetter(data.features[0].attributes.garbage);
-          document.querySelector('.info-container > .recycle').innerHTML = '<span>Recycle:</span> ' + capitalizeFirstLetter(data.features[0].attributes.recycling) + '-' + capitalizeFirstLetter(data.features[0].attributes.section);
-          document.querySelector('.info-container > .bulk').innerHTML = '<span>Bulk:</span> ' + capitalizeFirstLetter(data.features[0].attributes.bulk) + '-' + capitalizeFirstLetter(data.features[0].attributes.section);
+          document.querySelector('.info-container > .garbage').innerHTML = '<span>Garbage:</span> ' + capitalizeFirstLetter(data.features[0].attributes.day);
+          document.querySelector('.info-container > .recycle').innerHTML = '<span>Recycle:</span> ' + capitalizeFirstLetter(data.features[1].attributes.day) + '-' + capitalizeFirstLetter(data.features[1].attributes.week);
+          document.querySelector('.info-container > .bulk').innerHTML = '<span>Bulk:</span> ' + capitalizeFirstLetter(data.features[2].attributes.day) + '-' + capitalizeFirstLetter(data.features[2].attributes.week);
+          document.querySelector('.info-container > input[name="route-id"]').value = data.features[0].attributes.FID;
+          document.querySelector('.info-container > input[name="lng"]').value = ev.result.geometry.coordinates[0];
+          document.querySelector('.info-container > input[name="lat"]').value = ev.result.geometry.coordinates[1];
           (document.querySelector('#info').className === 'active') ? 0 : document.querySelector('#info').className = 'active';
-        });
+        }else{
+          document.querySelector('.info-container > .street-name').innerHTML = document.querySelector('.mapboxgl-ctrl-geocoder.mapboxgl-ctrl > input').value.split(',')[0];
+          document.querySelector('.info-container > .provider').innerHTML = '<span>Provider:</span> ' + capitalizeFirstLetter(data.features[0].attributes.contractor);
+          document.querySelector('.info-container > .garbage').innerHTML = '<span>Garbage:</span> ' + capitalizeFirstLetter(data.features[0].attributes.day);
+          document.querySelector('.info-container > .recycle').innerHTML = '<span>Recycle:</span> ' + capitalizeFirstLetter(data.features[0].attributes.day) + '-' + capitalizeFirstLetter(data.features[0].attributes.week);
+          document.querySelector('.info-container > .bulk').innerHTML = '<span>Bulk:</span> ' + capitalizeFirstLetter(data.features[0].attributes.day) + '-' + capitalizeFirstLetter(data.features[0].attributes.week);
+          document.querySelector('.info-container > input[name="route-id"]').value = data.features[0].attributes.FID;
+          document.querySelector('.info-container > input[name="lng"]').value = ev.result.geometry.coordinates[0];
+          document.querySelector('.info-container > input[name="lat"]').value = ev.result.geometry.coordinates[1];
+          (document.querySelector('#info').className === 'active') ? 0 : document.querySelector('#info').className = 'active';
+        }
       });
   });
 });

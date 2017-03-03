@@ -13,21 +13,27 @@
   <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
   <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.29.0/mapbox-gl.js"></script>
   <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
+  <link href='assets/css/fullcalendar.min.css' rel='stylesheet' />
+  <link href='assets/css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+  <link href='assets/css/style.v1.css' rel='stylesheet' />
+  <script src='assets/js/moment.min.js'></script>
+  <script src='assets/js/jquery.min.js'></script>
+  <script src='assets/js/fullcalendar.min.js'></script>
 </head>
 <body>
   <main>
     <section id="info">
       <section class="info-container">
+        <input type="hidden" name="route-id" value="">
+        <input type="hidden" name="lng" value="">
+        <input type="hidden" name="lat" value="">
         <article class="street-name"></article>
         <article class="provider"></article>
         <article class="garbage"></article>
         <article class="recycle"></article>
         <article class="bulk"></article>
-        <article class="note">
-          <span>Note</span>
-          <strong>"A" Week</strong> - Every other week bulk and yard waste collection starting the week of Februay 28
-          <br><br><strong>"B" Week</strong> - Every other week bulk and yard waste collection starting the week of February 21
-          <br><br>*For more information check the calendar to get your next pick up date.
+        <article class="calendar">
+          <article><img src="assets/img/calendar.png" alt="calendar"> <span>CALENDAR</span></article>
         </article>
         <article class="subscribe">
           <form id="GD-snippet-form" action="https://public.govdelivery.com/accounts/MIDETROIT/subscribers/qualify" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="u6RmhC/hjJ33ZTmBM6mUjwZ5fWbubyuPz8AjyN1+Fw6KpN9XgdmT3U+O9tkLVSNhdYuO2dI7wyvu/lnXE8b5dg==" />
@@ -42,9 +48,43 @@
         </article>
       </section>
     </section>
+    <section id="box-calendar" class="">
+      <section id='calendar'></section>
+      <section id='leyend'>
+        <article>
+          <span>ssss</span> Garbage pick up
+        </article>
+        <article>
+          <span>ssss</span> Recycle pick up
+        </article>
+        <article>
+          <span>ssss</span> Bulk pick up
+        </article>
+        <article>
+          <span>ssss</span> Yard waste pick up
+        </article>
+      </section>
+      <section id="emergency-modal" class="">
+        <section class="emergency-container">
+          <article id="close-emergency-modal-btn-2">
+            <img src="assets/img/error.png" alt="close"></img>
+          </article>
+          <p><strong>Normal Date:</strong> <span id='emergency-normal-date'></span></p>
+          <p><strong>Reschedule Date:</strong> <span id='emergency-new-date'></span></p>
+          <p id="emergency-message"></p>
+        </section>
+      </section>
+      <article id="back-to-infor-btn">
+        <article class="triangle"></article>
+        <article class="back-text">
+          BACK
+        </article>
+      </article>
+    </section>
     <section id='map'></section>
   </main>
   <script src='assets/js/map.js'></script>
   <script src='assets/js/map_section_click_module.js'></script>
+  <script src="assets/js/module.event.js"></script>
 </body>
 </html>

@@ -1,0 +1,25 @@
+/*================== imports ======================*/
+@import url("../fonts/dosis/Dosis-Regular.ttf");
+@import url("../fonts/opensans/OpenSans-Regular.ttf");
+/*================== variables =================*/
+/*================== tags ======================*/
+body {
+  font-family: 'Open Sans', sans-serif;
+  width: 100%;
+  font-size: 1em;
+  margin: 0;
+  padding: 0; }
+
+main {
+  width: 100%;
+  height: 100vh;
+  position: relative; }
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Dosis', sans-serif; }
+
+/*======================= top ==================*/
+#calendar {
+  width: 80em; }
+
+/*# sourceMappingURL=calendar.styles.v0.1.css.map */
