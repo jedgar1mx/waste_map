@@ -181,7 +181,7 @@
               header: {
                 left: 'prev,next',
                 center: 'title',
-                right: ''
+                right: 'year'
               },
               defaultDate: today,
               navLinks: false, // can click day/week names to navigate views
